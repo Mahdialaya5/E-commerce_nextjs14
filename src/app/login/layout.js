@@ -1,5 +1,4 @@
 
-import "./globals.css";
 import { Roboto} from 'next/font/google'
  
 const roboto = Roboto({
@@ -8,19 +7,17 @@ const roboto = Roboto({
 })
 
 export const metadata = {
-  title: "Home",
+  title: "login",
   description: "E-commerce",
-  icons: {
-    icon: "https://cdn-icons-png.flaticon.com/512/8209/8209584.png"
-  }
+
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={roboto.className}>
+   
+      < div className={roboto.className}>
         {children}
-      </body>
-    </html>
+      </div>
+   
   );
 }
