@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import style from "./addproduct.module.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import UserRoute from "@/components/PrivateRoute/userRoute";
 
 
 export default function Addproduct() {
@@ -17,7 +18,7 @@ export default function Addproduct() {
     router.push("/");
   };
   return (
-    <div>
+    <UserRoute>
       <form className={style.formlg} onSubmit={handleSubmit}>
         <label> name : </label>
         <input
@@ -45,6 +46,6 @@ export default function Addproduct() {
           add
         </button>
       </form>
-    </div>
+   </UserRoute>
   );
 }

@@ -3,19 +3,21 @@ import styles from "./card.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-function Card({ el }) {
+function Card({ el,token }) {
   return (
     <div className={styles.card}>
       <Image
+        responsive="true"
+        priority
         src={el.url}
         width={275}
         height={300}
         alt="Picture"
-        layout="responsive"
+       
       />
       <h3>name:{el.name}</h3>
       <p>price:{el.price}</p>
-      <Link href={`/edit/${el._id}`} >edit</Link>
+     {token ? <Link href={`/edit/${el._id}`} >edit</Link> :null} 
     </div>
   );
 }
