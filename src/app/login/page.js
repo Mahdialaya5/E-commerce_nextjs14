@@ -18,15 +18,16 @@ export default function login() {
         .post("http://localhost:3000/api/user/login", { email, password })
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err))
-        router.push('/')
-    };
+    router.push('/')
+   
+     };
   return (
     <div>
         <form className={style.formlg}  onSubmit={handleSubmit} >
         <label> Email :  </label>
             <input type="email" className={style.inputcolor} onChange={(e)=>{setEmail(e.target.value)}} />
             <label> Password :  </label>
-            <input type="paswword" className={style.inputcolor} onChange={(e)=>{setPassword(e.target.value)}} />
+            <input type="password" className={style.inputcolor} onChange={(e)=>{setPassword(e.target.value)}} />
             <button className={style.btnsend}> Send</button>
         </form>
     

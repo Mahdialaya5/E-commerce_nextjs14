@@ -5,14 +5,12 @@ import axios from "axios";
 import { cookies } from 'next/headers'
 
 
-
-
-
 export default async function Home() {
+
   let data = await axios.get("http://localhost:3000/api/product/");
 
   const cookieStore = cookies()
-  const token = cookieStore.get('token').value
+  const token = cookieStore.get('token')?.value 
 
 
 

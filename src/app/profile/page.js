@@ -1,21 +1,39 @@
-'use client'
+"use client";
+import UserRoute from "@/components/PrivateRoute/userRoute";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { useRouter } from "next/navigation"
 
+export default function Page() {
 
+  const router=useRouter()
+  const [user, setuser] = useState({})
+  const token = document.cookie.split("=")[1];
 
-function Profil() {
+   useEffect(() => {
+
+    axios
+    .get("http://localhost:3000/api/user/getcurrentuser", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((res) => setuser(res.data))
+    .catch((err) => console.log(err))
+
+   }, [])
    
 
-    const router=useRouter()
-
-  
+  const handleDeleteCookie = () => {
+    axios
+      .post("http://localhost:3000/api/user/deletecookie")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+      router.push('/')
+  };
   return (
-    <div>
-            <button  onClick={logout} >logout</button>
-            <p>email:</p>
-    </div>
-  )
+    <UserRoute>
+      <p>email:{user&&user.email}</p>
+      <button onClick={handleDeleteCookie}>Delete Cookie</button>
+    </UserRoute>
+  );
 }
-
-export default Profil
