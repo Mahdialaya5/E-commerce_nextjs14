@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken"
 const uri = process.env.MONGODB_URI;
 const clientPromise = new MongoClient(uri).connect();
 
-//register
+//login
 export async function POST(req) {
     try {
       const client = await clientPromise;

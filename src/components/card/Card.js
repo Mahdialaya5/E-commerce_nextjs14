@@ -3,7 +3,7 @@ import styles from "./card.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-function Card({ el,token }) {
+function Card({ el,session}) {
   return (
     <div className={styles.card}>
       <Image
@@ -17,7 +17,7 @@ function Card({ el,token }) {
       />
       <h3>name:{el.name}</h3>
       <p>price:{el.price}</p>
-     {token ? <Link href={`/edit/${el._id}`} >edit</Link> :null} 
+     {session ? <Link href={`/edit/${el._id}`} >edit</Link> :null} 
     </div>
   );
 }

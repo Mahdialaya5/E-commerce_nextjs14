@@ -2,25 +2,35 @@
 
 import React, { useState } from "react"
 import style from "./login.module.css"
-import axios from "axios"
 import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 
 
 export default function login() {
 
     const [email,setEmail] =useState("")
     const [password,setPassword] =useState("")
+    const [error, seterror] = useState(null)
     const router=useRouter()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      axios
-        .post("http://localhost:3000/api/user/login", { email, password })
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err))
-    router.push('/')
+  
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+    console.log(result);
+      if (!result.error) {
+       console.log("success");
+          router.push("/");
+      } else {
+      
+       seterror(result.error);
+      }
+    };
    
-     };
   return (
     <div>
         <form className={style.formlg}  onSubmit={handleSubmit} >
@@ -29,6 +39,7 @@ export default function login() {
             <label> Password :  </label>
             <input type="password" className={style.inputcolor} onChange={(e)=>{setPassword(e.target.value)}} />
             <button className={style.btnsend}> Send</button>
+            {error && <p >{error}</p>}
         </form>
     
     </div>

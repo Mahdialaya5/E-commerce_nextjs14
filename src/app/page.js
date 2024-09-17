@@ -2,22 +2,19 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Card from "@/components/card/Card";
 import axios from "axios";
-import { cookies } from 'next/headers'
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route"
 
 export default async function Home() {
 
   let data = await axios.get("http://localhost:3000/api/product/");
 
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')?.value 
-
-
+  const session = await getServerSession(authOptions);
 
   return (
     <>
       <nav className={styles.nav}>
-       {!token ?<> <Link href={"/login"}>
+       {!session?<> <Link href={"/login"}>
           <button className={styles.btn}>login </button>
         </Link>
         <Link href={"/register"}>
@@ -32,7 +29,7 @@ export default async function Home() {
         }
       </nav>
       <main className={styles.main}>
-        {data && data.data.map((el) => <Card el={el} key={el._id}  token={token} />)}
+        {data && data.data.map((el) => <Card el={el} key={el._id}  session={session} />)}
       </main>
       <footer className={styles.footer}></footer>
     </>

@@ -18,7 +18,7 @@ export default function Addproduct() {
     router.push("/");
   };
   return (
-    <UserRoute>
+ 
       <form className={style.formlg} onSubmit={handleSubmit}>
         <label> name : </label>
         <input
@@ -46,6 +46,6 @@ export default function Addproduct() {
           add
         </button>
       </form>
-   </UserRoute>
+
   );
 }

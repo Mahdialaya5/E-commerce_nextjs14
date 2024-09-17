@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import style from "./edit.module.css";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-import UserRoute from "@/components/PrivateRoute/userRoute";
+
 
 export default function Editproduct() {
   const [product, setproduct] = useState();
@@ -28,7 +28,7 @@ export default function Editproduct() {
     window.location.reload
   };
   return (
-    <UserRoute>
+  
       <form className={style.formlg} onSubmit={handleSubmit}>
         <label> name : </label>
         <input
@@ -57,6 +57,6 @@ export default function Editproduct() {
         </button>
       </form>
   
-    </UserRoute>
+
   );
 }
